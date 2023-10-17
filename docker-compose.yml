@@ -1,5 +1,22 @@
 version: "3.9"
 services:
+  app:
+    build:
+      context: .
+    container_name: chatapp
+    environment:
+      - HOST="0.0.0.0"
+      - PORT=3000
+      - REDIS_HOST="0.0.0.0"
+      - REDIS_PORT=6379
+      - STREAM_MAX_LEN=1000
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+
   redis:
     image: redis:7.2.1
     ports:
